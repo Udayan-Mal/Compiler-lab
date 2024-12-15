@@ -26,3 +26,10 @@ Then compile using gcc lex.yy.c
 Run the program with ./a.out sample.c, where sample.c is the C source file to analyze.
 Purpose
 This repository serves as an educational tool for learning about compiler design, particularly the process of lexical analysis, and understanding how to identify and categorize lexemes in programming languages. It covers a range of topics, including basic lexical structure recognition and the implementation of a lexical analyzer using Lex.
+
+### Visit the Project Webpage
+
+You can view the project live on the web by clicking the link below:
+
+Compiler Lab Website : (https://udayan-mal.github.io/Compiler-lab/)
+
