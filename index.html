@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compiler Design Lab</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Programming Lexeme Check - C Programs</h1>
+        
+        <button class="question-btn" onclick="showCode(1)">P1- Check if Lexeme is Integer Constant</button>
+        <div class="code-box" id="code1">
+            <pre>
+#include&lt;stdio.h&gt; 
+#include&lt;ctype.h&gt;
+
+void main()
+{
+    int flag = 1, i = 0;
+    char str[80];
+    
+    printf("Enter a lexeme: "); 
+    scanf("%s", str);
+        
+    while(str[i] != '\0')
+    {
+        if(isdigit(str[i]))
+        {
+            i++;
+        }
+        else
+        {
+            flag = 0;
+            break;
+        }
+    }
+    
+    if(flag == 1) 
+        printf("Integer Constant");
+    else
+        printf("Not integer constant");
+}
+            </pre>
+        </div>
+
+        <button class="question-btn" onclick="showCode(2)">P2- Check if Lexeme is Identifier</button>
+        <div class="code-box" id="code2">
+            <pre>
+#include&lt;stdio.h&gt; 
+#include&lt;ctype.h&gt;
+
+void main()
+{
+    int flag = 1, i = 0;
+    char str[80];
+    
+    printf("Enter a lexeme: "); 
+    scanf("%s", str);
+    
+    // Check if the first character is valid
+    if(isalpha(str[0]) || str[0] == '_')
+    {
+        // Check the rest of the string
+        while(str[i] != '\0')
+        {
+            if(isalpha(str[i]) || isdigit(str[i]) || str[i] == '_')
+            {
+                i++;
+            }
+            else
+            {
+                flag = 0;
+                break;
+            }
+        }
+    }
+    else
+    {
+        flag = 0;
+    }
+
+    if(flag == 1)
+        printf("Identifier");
+    else
+        printf("Not identifier");
+}
+            </pre>
+        </div>
+
+        <button class="question-btn" onclick="showCode(3)">P3- Check if Lexeme is Keyword</button>
+        <div class="code-box" id="code3">
+            <pre>
+#include&lt;stdio.h&gt; 
+#include&lt;string.h&gt;
+
+void main()
+{
+    int flag=0,i;
+    char str[80];
+    char *words[] =
+        {
+            "auto", "break", "case", "char", 
+            "const", "continue", "default", "do",
+            "double", "else", "enum", "extern", 
+            "float", "for", "goto", "if", 
+            "int", "long", "register", "return", 
+            "short", "signed", "sizeof", "static", 
+            "struct", "switch", "typedef", "union", 
+            "unsigned", "void", "volatile", "while"
+        };
+    
+    printf("Enter a lexeme:"); 
+    scanf("%s",str);
+    
+    for(i=0;i<=31;i++)
+    {
+        if(strcmp(str,words[i])==0)
+        {
+            flag=1;
+            break;
+        }
+    }
+
+    if(flag==1) 
+        printf("keyword");
+    else
+        printf("Not Keyword");
+}
+            </pre>
+        </div>
+
+        <button class="question-btn" onclick="showCode(4)">P4- Lexical Analyzer Using Lex (Lex Program Sample)</button>
+        <div class="code-box" id="code4">
+            <pre>
+%{
+%}
+
+identifier [a-zA-Z][a-zA-Z0-9]*
+number [0-9]+
+
+%%
+
+int {printf("\n\t%s is a KEYWORD",yytext);}
+float {printf("\n\t%s is a KEYWORD",yytext);}
+void {printf("\n\t%s is a KEYWORD",yytext);}
+char {printf("\n\t%s is a KEYWORD",yytext);}
+
+{identifier} {printf("\n %s IDENTIFIER",yytext);}
+{number} { printf("\n\t%s is a NUMBER",yytext);}
+
+"= " {printf("\n\t%s is an ASSIGNMENT OPERATOR",yytext);}
+"; " {printf("\n\t%s is a DELIMETER",yytext);}
+"(" {printf("\n\t%s is a OPEN PARENTHESIS",yytext);}
+")" {printf("\n\t%s is a CLOSE PARENTHESIS ",yytext);}
+"{" {printf("\n\t%s is a OPEN BRACE ",yytext);}
+"}" {printf("\n\t%s is a CLOSED BRACE",yytext);}
+
+%%
+
+void main(int argc,char **argv)
+{
+   FILE *fp;
+   fp = fopen(argv[1],"r"); 
+   if(fp == NULL)
+   {
+       printf("could not open %s \n",argv[1]); 
+       exit(0);
+   }
+   yyin = fp;
+   
+   yylex(); 
+}
+
+int yywrap()
+{
+    return 0;
+}
+
+/* program name is lexp.lex 
+Process for Compile and Run
+
+flex lexp.lex
+gcc lex.yy.c
+./a.out sample.c
+
+*/
+            </pre>
+        </div>
+
+        <button class="question-btn" onclick="showCode(5)">P5- Convert RE to NFA</button>
+        <div class="code-box" id="code5">
+            <pre>
+                
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+
+void main() {
+    char reg[20];
+    int q[20][3] = {0}, i = 0, j = 1, len, a, b;
+    printf("Enter regular expression: ");
+    scanf("%s", reg);
+    len = strlen(reg);
+
+    while(i < len) {
+        if(reg[i] == 'a' && reg[i + 1] != '|' && reg[i + 1] != '*') {
+            q[j][0] = j + 1;
+            j++;
+        }
+
+        if(reg[i] == 'b' && reg[i + 1] != '|' && reg[i + 1] != '*') {
+            q[j][1] = j + 1;
+            j++;
+        }
+
+        if(reg[i] == 'e' && reg[i + 1] != '|' && reg[i + 1] != '*') {
+            q[j][2] = j + 1;
+            j++;
+        }
+
+        if(reg[i] == 'a' && reg[i + 1] == '|' && reg[i + 2] == 'b') { 
+            q[j][2] = ((j + 1) * 10) + (j + 3);
+            j++;
+            q[j][0] = j + 1;
+            j++;
+            q[j][2] = j + 3;
+            j++;
+            q[j][1] = j + 1;
+            j++;
+            q[j][2] = j + 1;
+            j++;
+            i = i + 2;
+        }
+
+        if(reg[i] == 'b' && reg[i + 1] == '|' && reg[i + 2] == 'a') {
+            q[j][2] = ((j + 1) * 10) + (j + 3); 
+            j++;
+            q[j][1] = j + 1;
+            j++;
+            q[j][2] = j + 3;
+            j++;
+            q[j][0] = j + 1;
+            j++;
+            q[j][2] = j + 1;
+            j++;
+            i = i + 2;
+        }
+
+        if(reg[i] == 'a' && reg[i + 1] == '*') {
+            q[j][2] = ((j + 1) * 10) + (j + 3); 
+            j++;
+            q[j][0] = j + 1; 
+            j++;
+            q[j][2] = ((j + 1) * 10) + (j - 1);
+            j++;
+        }
+
+        if(reg[i] == 'b' && reg[i + 1] == '*') {
+            q[j][2] = ((j + 1) * 10) + (j + 3);
+            j++;
+            q[j][1] = j + 1; 
+            j++;
+            q[j][2] = ((j + 1) * 10) + (j - 1);
+            j++;
+        }
+
+        if(reg[i] == ')' && reg[i + 1] == '*') {
+            q[0][2] = ((j + 1) * 10) + 1;
+            q[j][2] = ((j + 1) * 10) + 1;
+            j++;
+        }
+        i++;
+    }
+
+    printf("\n\tTransition Table \n");
+    printf("_____________________________________\n");
+    printf("Current State |\tInput |\tNext State");
+    printf("\n_____________________________________\n");
+
+    for(i = 0; i <= j; i++) {
+        if(q[i][0] != 0) 
+            printf("\n  Q[%d]\t      |   a   |  q[%d]", i, q[i][0]);
+
+        if(q[i][1] != 0) 
+            printf("\n  Q[%d]\t      |   b   |  Q[%d]", i, q[i][1]);
+
+        if(q[i][2] != 0) {
+            if(q[i][2] < 10)
+                printf("\n  Q[%d]\t      |   e   |  Q[%d]", i, q[i][2]);
+            else 
+                printf("\n  Q[%d]\t      |   e   |  Q[%d] , Q[%d]", i, q[i][2] / 10, q[i][2] % 10);
+        }
+    }
+}
+            </pre>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

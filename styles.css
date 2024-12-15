@@ -1,0 +1,138 @@
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #0b0433;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgb(24, 12, 124);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #504f4f;
+}
+
+.question-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.question-btn:hover {
+    background-color: #45a049;
+}
+
+.code-box {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: monospace;
+    font-size: 14px;
+} */
+
+
+/* Dark mode */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text color for readability */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #1e1e1e; /* Slightly lighter dark background */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #bb86fc; /* Light purple for the header */
+    margin-bottom: 20px;
+}
+
+.question-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #6200ea; /* Vibrant purple for buttons */
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.question-btn:hover {
+    background-color: #3700b3; /* Darker purple on hover */
+}
+
+.code-box {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #2c2c2c; /* Darker background for code boxes */
+    border: 1px solid #444444;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: monospace;
+    font-size: 14px;
+    color: #e0e0e0; /* Light text for code */
+}
+
+code {
+    color: #bb86fc; /* Purple code highlighting */
+}
+
+pre {
+    background-color: #1e1e1e; /* Dark background for the code itself */
+    border-radius: 5px;
+    padding: 15px;
+    overflow-x: auto;
+}
+
+button {
+    transition: transform 0.3s ease-in-out;
+}
+
+button:focus {
+    outline: none;
+    transform: scale(1.05); /* Slight zoom on focus */
+}
+
+a {
+    color: #bb86fc; /* Purple for any links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
